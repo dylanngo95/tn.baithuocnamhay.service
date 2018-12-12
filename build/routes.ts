@@ -52,7 +52,7 @@ const models: TsoaRoute.Models = {
 };
 
 export function RegisterRoutes(app: any) {
-    app.get('/v1/content/:id',
+    app.get('/content/:id',
         function(request: any, response: any, next: any) {
             const args = {
                 id: { "in": "path", "name": "id", "required": true, "dataType": "string" },
@@ -74,7 +74,7 @@ export function RegisterRoutes(app: any) {
             const promise = controller.getById.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, next);
         });
-    app.get('/v1/content',
+    app.get('/content',
         function(request: any, response: any, next: any) {
             const args = {
                 page: { "in": "query", "name": "page", "required": true, "dataType": "double" },
@@ -100,7 +100,7 @@ export function RegisterRoutes(app: any) {
             const promise = controller.getPaginated.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, next);
         });
-    app.post('/v1/content',
+    app.post('/content',
         function(request: any, response: any, next: any) {
             const args = {
                 content: { "in": "body", "name": "content", "required": true, "ref": "MContentView" },
@@ -122,7 +122,7 @@ export function RegisterRoutes(app: any) {
             const promise = controller.addContent.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, next);
         });
-    app.delete('/v1/content/:id',
+    app.delete('/content/:id',
         function(request: any, response: any, next: any) {
             const args = {
                 id: { "in": "path", "name": "id", "required": true, "dataType": "string" },
@@ -144,7 +144,7 @@ export function RegisterRoutes(app: any) {
             const promise = controller.delete.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, next);
         });
-    app.get('/v1/Category/:id',
+    app.get('/Category/:id',
         function(request: any, response: any, next: any) {
             const args = {
                 id: { "in": "path", "name": "id", "required": true, "dataType": "string" },
@@ -166,7 +166,7 @@ export function RegisterRoutes(app: any) {
             const promise = controller.getById.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, next);
         });
-    app.get('/v1/Category',
+    app.get('/Category',
         function(request: any, response: any, next: any) {
             const args = {
                 page: { "in": "query", "name": "page", "required": true, "dataType": "double" },
@@ -192,7 +192,7 @@ export function RegisterRoutes(app: any) {
             const promise = controller.getPaginated.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, next);
         });
-    app.post('/v1/Category',
+    app.post('/Category',
         function(request: any, response: any, next: any) {
             const args = {
                 content: { "in": "body", "name": "content", "required": true, "ref": "MCategoryView" },
@@ -214,7 +214,7 @@ export function RegisterRoutes(app: any) {
             const promise = controller.addContent.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, next);
         });
-    app.delete('/v1/Category/:id',
+    app.delete('/Category/:id',
         function(request: any, response: any, next: any) {
             const args = {
                 id: { "in": "path", "name": "id", "required": true, "dataType": "string" },
@@ -236,7 +236,7 @@ export function RegisterRoutes(app: any) {
             const promise = controller.delete.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, next);
         });
-    app.get('/v1/tag/:id',
+    app.get('/tag/:id',
         function(request: any, response: any, next: any) {
             const args = {
                 id: { "in": "path", "name": "id", "required": true, "dataType": "string" },
@@ -258,7 +258,7 @@ export function RegisterRoutes(app: any) {
             const promise = controller.getById.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, next);
         });
-    app.get('/v1/tag',
+    app.get('/tag',
         function(request: any, response: any, next: any) {
             const args = {
                 page: { "in": "query", "name": "page", "required": true, "dataType": "double" },
@@ -284,7 +284,7 @@ export function RegisterRoutes(app: any) {
             const promise = controller.getPaginated.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, next);
         });
-    app.post('/v1/tag',
+    app.post('/tag',
         function(request: any, response: any, next: any) {
             const args = {
                 tag: { "in": "body", "name": "tag", "required": true, "ref": "MTagView" },
@@ -306,7 +306,7 @@ export function RegisterRoutes(app: any) {
             const promise = controller.addContent.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, next);
         });
-    app.delete('/v1/tag/:id',
+    app.delete('/tag/:id',
         function(request: any, response: any, next: any) {
             const args = {
                 id: { "in": "path", "name": "id", "required": true, "dataType": "string" },

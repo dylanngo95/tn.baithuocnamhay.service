@@ -7,7 +7,7 @@
     "start": "yarn start:prod",
     "start:prod": "yarn env:prod node ./bin/src/index.js",
     "start:stage": "yarn env:stage node ./bin/src/index.js",
-    "start:dev": "yarn build && yarn env:dev ts-node-dev --respawn ./src",
+    "start:dev": "yarn build:tsoa && yarn env:dev ts-node-dev --respawn ./src",
     "build": "yarn build:tsoa && tsc && yarn copy:swagger",
     "build:routes": "tsoa routes",
     "build:swagger": "tsoa swagger",
