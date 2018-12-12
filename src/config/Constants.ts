@@ -6,7 +6,7 @@ config({ path: pathResolve(__dirname, `./env/.env.${env.NODE_ENV}`) });
 
 const Config =  {
   environment: env.NODE_ENV,
-  domain: env.DOMAIN,
+  host: env.HOST,
   port: Number(env.PORT),
   mongoConnectionString: env.MONGO_CONNECTION_STRING,
   userName: env.USER_NAME,

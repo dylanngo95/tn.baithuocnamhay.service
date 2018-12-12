@@ -27,10 +27,11 @@ class Server {
         this.app.use(morgan('dev', { skip: () => !Logger_1.Logger.shouldLog }));
         routes_1.RegisterRoutes(this.app);
         this.app.use(ErrorHandler_1.ErrorHandler.handleError);
-        const swaggerDocument = require('../../build/swagger/swagger.json');
+        // const swaggerDocument = require('../../build/swagger/swagger.json');
+        const port = Constants_1.Constants.config.environment === 'production' ? 80 : this.port;
         const options = {
             explorer: true,
-            swaggerUrl: `http://${Constants_1.Constants.config.domain}:${Constants_1.Constants.config.port}/swagger/swagger.json`
+            swaggerUrl: `${Constants_1.Constants.config.host}:${port}/swagger/swagger.json`
         };
         this.app.use('/docs', swaggerUi.serve, swaggerUi.setup(null, options));
         this.app.use(express.static(require('path').join(__dirname, '..', '..', 'build')));
@@ -41,7 +42,7 @@ class Server {
             process.on('unhandledRejection', this.criticalErrorHandler);
             const listen = this.app.listen(port);
             Logger_1.Logger.info(`Server running environment: ${Constants_1.Constants.config.environment} with port: ${port}`);
-            Logger_1.Logger.info(`Go to http://${Constants_1.Constants.config.domain}:${port}`);
+            Logger_1.Logger.info(`Go to ${Constants_1.Constants.config.host}:${port}`);
             return listen;
         });
     }
