@@ -21,11 +21,10 @@ export class Server {
     RegisterRoutes(this.app);
     this.app.use(ErrorHandler.handleError);
 
-    // const swaggerDocument = require('../../build/swagger/swagger.json');
-    const port = Constants.config.environment === 'production' ? 80 : this.port;
+    const swaggerUrl = Constants.config.environment === 'production' ? `${Constants.config.host}:/swagger/swagger.json` : `${Constants.config.host}:${this.port}/swagger/swagger.json`;
     const options = {
       explorer : true,
-      swaggerUrl: `${Constants.config.host}:${port}/swagger/swagger.json`
+      swaggerUrl: swaggerUrl
     };
     
     this.app.use('/docs', swaggerUi.serve, swaggerUi.setup(null, options));

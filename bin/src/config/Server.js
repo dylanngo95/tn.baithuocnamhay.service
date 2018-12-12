@@ -27,11 +27,10 @@ class Server {
         this.app.use(morgan('dev', { skip: () => !Logger_1.Logger.shouldLog }));
         routes_1.RegisterRoutes(this.app);
         this.app.use(ErrorHandler_1.ErrorHandler.handleError);
-        // const swaggerDocument = require('../../build/swagger/swagger.json');
-        const port = Constants_1.Constants.config.environment === 'production' ? 80 : this.port;
+        const swaggerUrl = Constants_1.Constants.config.environment === 'production' ? `${Constants_1.Constants.config.host}:/swagger/swagger.json` : `${Constants_1.Constants.config.host}:${this.port}/swagger/swagger.json`;
         const options = {
             explorer: true,
-            swaggerUrl: `${Constants_1.Constants.config.host}:${port}/swagger/swagger.json`
+            swaggerUrl: swaggerUrl
         };
         this.app.use('/docs', swaggerUi.serve, swaggerUi.setup(null, options));
         this.app.use(express.static(require('path').join(__dirname, '..', '..', 'build')));
