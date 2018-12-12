@@ -27,7 +27,7 @@ class Server {
         this.app.use(morgan('dev', { skip: () => !Logger_1.Logger.shouldLog }));
         routes_1.RegisterRoutes(this.app);
         this.app.use(ErrorHandler_1.ErrorHandler.handleError);
-        const swaggerUrl = Constants_1.Constants.config.environment === 'production' ? `${Constants_1.Constants.config.host}:/swagger/swagger.json` : `${Constants_1.Constants.config.host}:${this.port}/swagger/swagger.json`;
+        const swaggerUrl = Constants_1.Constants.config.environment === 'production' ? `${Constants_1.Constants.config.host}/swagger/swagger.json` : `${Constants_1.Constants.config.host}:${this.port}/swagger/swagger.json`;
         const options = {
             explorer: true,
             swaggerUrl: swaggerUrl

@@ -21,7 +21,7 @@ export class Server {
     RegisterRoutes(this.app);
     this.app.use(ErrorHandler.handleError);
 
-    const swaggerUrl = Constants.config.environment === 'production' ? `${Constants.config.host}:/swagger/swagger.json` : `${Constants.config.host}:${this.port}/swagger/swagger.json`;
+    const swaggerUrl = Constants.config.environment === 'production' ? `${Constants.config.host}/swagger/swagger.json` : `${Constants.config.host}:${this.port}/swagger/swagger.json`;
     const options = {
       explorer : true,
       swaggerUrl: swaggerUrl
