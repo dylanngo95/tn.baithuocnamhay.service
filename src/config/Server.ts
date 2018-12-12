@@ -15,17 +15,6 @@ export class Server {
 
   constructor() {
     this.app.use(this.allowCors);
-
-    // this.app.use(cors({
-    //   origin: function (origin, callback) {
-    //     if (config.cors.indexOf(origin) !== -1) {
-    //       callback(null, true);
-    //     } else {
-    //       callback(new Error('Not allowed by CORS'));
-    //     }
-    //   }
-    // }));
-
     this.app.use(bodyParser.urlencoded({ extended: true }));
     this.app.use(bodyParser.json());
     this.app.use(morgan('dev', { skip: () => !Logger.shouldLog }));
@@ -33,8 +22,13 @@ export class Server {
     this.app.use(ErrorHandler.handleError);
 
     const swaggerDocument = require('../../build/swagger/swagger.json');
-
-    this.app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+    const options = {
+      explorer : true,
+      swaggerUrl: `http://${Constants.config.domain}:${Constants.config.port}/swagger/swagger.json`
+    };
+    
+    this.app.use('/docs', swaggerUi.serve, swaggerUi.setup(null, options));
+    this.app.use(express.static(require('path').join(__dirname, '..', '..', 'build')));
   }
 
   public async listen(port: number = this.port) {
@@ -42,8 +36,8 @@ export class Server {
     process.on('unhandledRejection', this.criticalErrorHandler);
     const listen = this.app.listen(port);
 
-    Logger.info(`Server running environment: ${Constants.config.environment} and port: ${port}`);
-    Logger.info(`Go to http://localhost:${port}`);
+    Logger.info(`Server running environment: ${Constants.config.environment} with port: ${port}`);
+    Logger.info(`Go to http://${Constants.config.domain}:${port}`);
     return listen;
   }
 
