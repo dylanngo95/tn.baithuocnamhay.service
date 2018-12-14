@@ -1,13 +1,21 @@
+/// <reference types="node" />
 import { TsoaRoute } from './tsoa-route';
 export declare function ValidateParam(property: TsoaRoute.PropertySchema, value: any, generatedModels: TsoaRoute.Models, name: string | undefined, fieldErrors: FieldErrors, parent?: string): any;
-export declare function validateInt(name: string, value: any, fieldErrors: FieldErrors, validators?: IntegerValidator, parent?: string): number | undefined;
-export declare function validateFloat(name: string, value: any, fieldErrors: FieldErrors, validators?: FloatValidator, parent?: string): number | undefined;
-export declare function validateEnum(name: string, value: any, fieldErrors: FieldErrors, members?: string[], parent?: string): any;
-export declare function validateDate(name: string, value: any, fieldErrors: FieldErrors, validators?: DateValidator, parent?: string): Date | undefined;
-export declare function validateDateTime(name: string, value: any, fieldErrors: FieldErrors, validators?: DateTimeValidator, parent?: string): Date | undefined;
-export declare function validateString(name: string, value: any, fieldErrors: FieldErrors, validators?: StringValidator, parent?: string): string | undefined;
-export declare function validateBool(name: string, value: any, fieldErrors: FieldErrors, validators?: BooleanValidator, parent?: string): any;
-export declare function validateArray(name: string, value: any[], fieldErrors: FieldErrors, schema?: TsoaRoute.PropertySchema, validators?: ArrayValidator, parent?: string): any[] | undefined;
+export declare class ValidationService {
+    private readonly models;
+    constructor(models: TsoaRoute.Models);
+    ValidateParam(property: TsoaRoute.PropertySchema, value: any, name: string | undefined, fieldErrors: FieldErrors, parent?: string): any;
+    validateInt(name: string, value: any, fieldErrors: FieldErrors, validators?: IntegerValidator, parent?: string): number | undefined;
+    validateFloat(name: string, value: any, fieldErrors: FieldErrors, validators?: FloatValidator, parent?: string): number | undefined;
+    validateEnum(name: string, value: any, fieldErrors: FieldErrors, members?: string[], parent?: string): any;
+    validateDate(name: string, value: any, fieldErrors: FieldErrors, validators?: DateValidator, parent?: string): Date | undefined;
+    validateDateTime(name: string, value: any, fieldErrors: FieldErrors, validators?: DateTimeValidator, parent?: string): Date | undefined;
+    validateString(name: string, value: any, fieldErrors: FieldErrors, validators?: StringValidator, parent?: string): string | undefined;
+    validateBool(name: string, value: any, fieldErrors: FieldErrors, validators?: BooleanValidator, parent?: string): any;
+    validateArray(name: string, value: any[], fieldErrors: FieldErrors, schema?: TsoaRoute.PropertySchema, validators?: ArrayValidator, parent?: string): any[] | undefined;
+    validateBuffer(name: string, value: string): Buffer;
+    validateModel(name: string, value: any, refName: string, fieldErrors: FieldErrors, parent?: string): any;
+}
 export interface IntegerValidator {
     isInt?: {
         errorMsg?: string;
