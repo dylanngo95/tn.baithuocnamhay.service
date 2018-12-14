@@ -2,3 +2,6 @@
 yarn.log
 package-log.json
 node_modules
+node_modules/
+./node_modules
+./node_modules/**
