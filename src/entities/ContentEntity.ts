@@ -1,4 +1,5 @@
 import { DbEntity, DbSchema } from "./base/DbEntity";
+import * as mongoose from "mongoose";
 
 export interface ContentEntity extends DbEntity {
   title: string;
@@ -6,7 +7,6 @@ export interface ContentEntity extends DbEntity {
   content: string;
   active: number;
   image: string;
-  categories: string;
   userId: string;
 }
 
@@ -17,6 +17,5 @@ export const ContentSchema = {
   content: { type: String, require: true, },
   active: { type: Number, require: true, },
   image: { type: String, require: true, },
-  categories: { type: String, require: true, },
   userId: { type: String, require: true, },
 };

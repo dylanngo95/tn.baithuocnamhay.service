@@ -4,8 +4,26 @@
 		"application/json"
 	],
 	"definitions": {
-		"MContentView": {
+		"ContentEntity": {
 			"properties": {
+				"_id": {
+					"type": "object",
+					"x-nullable": true
+				},
+				"created": {
+					"type": "number",
+					"format": "double",
+					"x-nullable": true
+				},
+				"updated": {
+					"type": "number",
+					"format": "double",
+					"x-nullable": true
+				},
+				"delete": {
+					"type": "boolean",
+					"x-nullable": true
+				},
 				"title": {
 					"type": "string"
 				},
@@ -22,9 +40,6 @@
 				"image": {
 					"type": "string"
 				},
-				"categories": {
-					"type": "string"
-				},
 				"userId": {
 					"type": "string"
 				}
@@ -35,7 +50,6 @@
 				"content",
 				"active",
 				"image",
-				"categories",
 				"userId"
 			],
 			"type": "object"
@@ -71,6 +85,45 @@
 				"limit",
 				"totalPages",
 				"docs"
+			],
+			"type": "object"
+		},
+		"MContentView": {
+			"properties": {
+				"title": {
+					"type": "string"
+				},
+				"description": {
+					"type": "string"
+				},
+				"content": {
+					"type": "string"
+				},
+				"active": {
+					"type": "number",
+					"format": "double"
+				},
+				"image": {
+					"type": "string"
+				},
+				"categories": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"userId": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"title",
+				"description",
+				"content",
+				"active",
+				"image",
+				"categories",
+				"userId"
 			],
 			"type": "object"
 		},
@@ -117,7 +170,8 @@
 		"TagEntity": {
 			"properties": {
 				"_id": {
-					"type": "object"
+					"type": "object",
+					"x-nullable": true
 				},
 				"created": {
 					"type": "number",
@@ -129,6 +183,10 @@
 					"format": "double",
 					"x-nullable": true
 				},
+				"delete": {
+					"type": "boolean",
+					"x-nullable": true
+				},
 				"contentId": {
 					"type": "string"
 				},
@@ -137,7 +195,6 @@
 				}
 			},
 			"required": [
-				"_id",
 				"contentId",
 				"categoryId"
 			],
@@ -163,7 +220,7 @@
 					"200": {
 						"description": "Ok",
 						"schema": {
-							"$ref": "#/definitions/MContentView"
+							"$ref": "#/definitions/ContentEntity"
 						}
 					}
 				},
@@ -258,7 +315,7 @@
 				]
 			},
 			"post": {
-				"operationId": "AddContent",
+				"operationId": "SaveContent",
 				"produces": [
 					"application/json"
 				],
@@ -266,7 +323,7 @@
 					"200": {
 						"description": "Ok",
 						"schema": {
-							"$ref": "#/definitions/MContentView"
+							"$ref": "#/definitions/ContentEntity"
 						}
 					}
 				},
@@ -278,6 +335,36 @@
 					{
 						"in": "body",
 						"name": "content",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/MContentView"
+						}
+					}
+				]
+			}
+		},
+		"/content/add-content": {
+			"post": {
+				"operationId": "AddContent",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/ContentEntity"
+						}
+					}
+				},
+				"tags": [
+					"Content"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "contentView",
 						"required": true,
 						"schema": {
 							"$ref": "#/definitions/MContentView"

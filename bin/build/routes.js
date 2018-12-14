@@ -7,14 +7,17 @@ const ContentController_1 = require("./../src/controllers/ContentController");
 const CategoryController_1 = require("./../src/controllers/CategoryController");
 const TagController_1 = require("./../src/controllers/TagController");
 const models = {
-    "MContentView": {
+    "ContentEntity": {
         "properties": {
+            "_id": { "dataType": "any" },
+            "created": { "dataType": "double" },
+            "updated": { "dataType": "double" },
+            "delete": { "dataType": "boolean" },
             "title": { "dataType": "string", "required": true },
             "description": { "dataType": "string", "required": true },
             "content": { "dataType": "string", "required": true },
             "active": { "dataType": "double", "required": true },
             "image": { "dataType": "string", "required": true },
-            "categories": { "dataType": "string", "required": true },
             "userId": { "dataType": "string", "required": true },
         },
     },
@@ -25,6 +28,17 @@ const models = {
             "limit": { "dataType": "double", "required": true },
             "totalPages": { "dataType": "double", "required": true },
             "docs": { "dataType": "array", "array": { "dataType": "any" }, "required": true },
+        },
+    },
+    "MContentView": {
+        "properties": {
+            "title": { "dataType": "string", "required": true },
+            "description": { "dataType": "string", "required": true },
+            "content": { "dataType": "string", "required": true },
+            "active": { "dataType": "double", "required": true },
+            "image": { "dataType": "string", "required": true },
+            "categories": { "dataType": "array", "array": { "dataType": "string" }, "required": true },
+            "userId": { "dataType": "string", "required": true },
         },
     },
     "MCategoryView": {
@@ -43,9 +57,10 @@ const models = {
     },
     "TagEntity": {
         "properties": {
-            "_id": { "dataType": "any", "required": true },
+            "_id": { "dataType": "any" },
             "created": { "dataType": "double" },
             "updated": { "dataType": "double" },
+            "delete": { "dataType": "boolean" },
             "contentId": { "dataType": "string", "required": true },
             "categoryId": { "dataType": "string", "required": true },
         },
@@ -95,6 +110,24 @@ function RegisterRoutes(app) {
     app.post('/content', function (request, response, next) {
         const args = {
             content: { "in": "body", "name": "content", "required": true, "ref": "MContentView" },
+        };
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request);
+        }
+        catch (err) {
+            return next(err);
+        }
+        const controller = ioc_1.iocContainer.get(ContentController_1.ContentController);
+        if (typeof controller['setStatus'] === 'function') {
+            controller.setStatus(undefined);
+        }
+        const promise = controller.saveContent.apply(controller, validatedArgs);
+        promiseHandler(controller, promise, response, next);
+    });
+    app.post('/content/add-content', function (request, response, next) {
+        const args = {
+            contentView: { "in": "body", "name": "contentView", "required": true, "ref": "MContentView" },
         };
         let validatedArgs = [];
         try {

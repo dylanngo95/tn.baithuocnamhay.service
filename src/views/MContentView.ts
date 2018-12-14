@@ -4,6 +4,6 @@ export interface MContentView {
   content: string;
   active: number;
   image: string;
-  categories: string;
+  categories: string[];
   userId: string;
 }

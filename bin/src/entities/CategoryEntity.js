@@ -1,20 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CategorySchema = {
-    index: {
+const DbEntity_1 = require("./base/DbEntity");
+exports.CategorySchema = Object.assign({}, DbEntity_1.DbSchema, { index: {
         type: Number,
         require: true,
-    },
-    name: {
+    }, name: {
         type: String,
         require: true,
-    },
-    description: {
+    }, description: {
         type: String,
         require: true,
-    },
-    active: {
+    }, active: {
         type: Number,
         require: true,
-    }
-};
+    } });

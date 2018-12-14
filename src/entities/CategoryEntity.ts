@@ -1,4 +1,4 @@
-import { DbEntity } from "./base/DbEntity";
+import { DbEntity, DbSchema } from "./base/DbEntity";
 
 export interface CategoryEntity extends DbEntity {
   index: number,
@@ -8,6 +8,7 @@ export interface CategoryEntity extends DbEntity {
 }
 
 export const CategorySchema = {
+  ...DbSchema,
   index: {
     type: Number,
     require: true,

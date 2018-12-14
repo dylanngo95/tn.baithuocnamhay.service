@@ -5,6 +5,8 @@ exports.DbSchema = {
     _id: {
         type: mongoose.Schema.Types.ObjectId,
         auto: true,
+        index: true,
+        require: true,
     },
     created: {
         type: mongoose.Schema.Types.Number,
@@ -15,5 +17,10 @@ exports.DbSchema = {
         type: mongoose.Schema.Types.Number,
         require: false,
         default: Date.now
+    },
+    delete: {
+        type: mongoose.Schema.Types.Boolean,
+        require: false,
+        default: false,
     }
 };

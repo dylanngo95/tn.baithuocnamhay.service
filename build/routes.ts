@@ -6,14 +6,17 @@ import { CategoryController } from './../src/controllers/CategoryController';
 import { TagController } from './../src/controllers/TagController';
 
 const models: TsoaRoute.Models = {
-    "MContentView": {
+    "ContentEntity": {
         "properties": {
+            "_id": { "dataType": "any" },
+            "created": { "dataType": "double" },
+            "updated": { "dataType": "double" },
+            "delete": { "dataType": "boolean" },
             "title": { "dataType": "string", "required": true },
             "description": { "dataType": "string", "required": true },
             "content": { "dataType": "string", "required": true },
             "active": { "dataType": "double", "required": true },
             "image": { "dataType": "string", "required": true },
-            "categories": { "dataType": "string", "required": true },
             "userId": { "dataType": "string", "required": true },
         },
     },
@@ -24,6 +27,17 @@ const models: TsoaRoute.Models = {
             "limit": { "dataType": "double", "required": true },
             "totalPages": { "dataType": "double", "required": true },
             "docs": { "dataType": "array", "array": { "dataType": "any" }, "required": true },
+        },
+    },
+    "MContentView": {
+        "properties": {
+            "title": { "dataType": "string", "required": true },
+            "description": { "dataType": "string", "required": true },
+            "content": { "dataType": "string", "required": true },
+            "active": { "dataType": "double", "required": true },
+            "image": { "dataType": "string", "required": true },
+            "categories": { "dataType": "array", "array": { "dataType": "string" }, "required": true },
+            "userId": { "dataType": "string", "required": true },
         },
     },
     "MCategoryView": {
@@ -42,9 +56,10 @@ const models: TsoaRoute.Models = {
     },
     "TagEntity": {
         "properties": {
-            "_id": { "dataType": "any", "required": true },
+            "_id": { "dataType": "any" },
             "created": { "dataType": "double" },
             "updated": { "dataType": "double" },
+            "delete": { "dataType": "boolean" },
             "contentId": { "dataType": "string", "required": true },
             "categoryId": { "dataType": "string", "required": true },
         },
@@ -104,6 +119,28 @@ export function RegisterRoutes(app: any) {
         function(request: any, response: any, next: any) {
             const args = {
                 content: { "in": "body", "name": "content", "required": true, "ref": "MContentView" },
+            };
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request);
+            } catch (err) {
+                return next(err);
+            }
+
+            const controller = iocContainer.get<ContentController>(ContentController);
+            if (typeof controller['setStatus'] === 'function') {
+                (<any>controller).setStatus(undefined);
+            }
+
+
+            const promise = controller.saveContent.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, next);
+        });
+    app.post('/content/add-content',
+        function(request: any, response: any, next: any) {
+            const args = {
+                contentView: { "in": "body", "name": "contentView", "required": true, "ref": "MContentView" },
             };
 
             let validatedArgs: any[] = [];

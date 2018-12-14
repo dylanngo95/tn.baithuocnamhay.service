@@ -22,29 +22,56 @@ const tsoa_1 = require("tsoa");
 const inversify_1 = require("inversify");
 const ContentService_1 = require("../services/ContentService");
 const ioc_1 = require("../inversify/ioc");
+const _ = require("lodash");
+const TagService_1 = require("../services/TagService");
+const ErrorHandler_1 = require("../config/ErrorHandler");
+const Constants_1 = require("../config/Constants");
 let ContentController = ContentController_1 = class ContentController extends tsoa_1.Controller {
-    constructor(service) {
+    constructor(contentService, tagService) {
         super();
-        this.service = service;
+        this.contentService = contentService;
+        this.tagService = tagService;
     }
     getById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.service.getById(id);
+            return this.contentService.getById(id);
         });
     }
     getPaginated(page, limit, fields, sort, q) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.service.getPaginated(page, limit, fields, sort, q);
+            return this.contentService.getPaginated(page, limit, fields, sort, q);
         });
     }
-    addContent(content) {
+    saveContent(content) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.service.save(content);
+            return this.contentService.save(content);
+        });
+    }
+    addContent(contentView) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const content = yield this.contentService.save(contentView);
+                if (!content)
+                    throw new ErrorHandler_1.ApiError(Constants_1.Constants.errorTypes.notFound);
+                for (let index = 0; index < contentView.categories.length; index++) {
+                    const category = contentView.categories[index].trim();
+                    if (!_.isEmpty(category)) {
+                        yield this.tagService.save({
+                            categoryId: category,
+                            contentId: content._id
+                        });
+                    }
+                }
+                return content;
+            }
+            catch (err) {
+                throw new ErrorHandler_1.ApiError(Constants_1.Constants.errorTypes.validation);
+            }
         });
     }
     delete(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.service.delete(id);
+            return this.contentService.delete(id);
         });
     }
 };
@@ -62,6 +89,10 @@ __decorate([
 __decorate([
     tsoa_1.Post(),
     __param(0, tsoa_1.Body())
+], ContentController.prototype, "saveContent", null);
+__decorate([
+    tsoa_1.Post('add-content'),
+    __param(0, tsoa_1.Body())
 ], ContentController.prototype, "addContent", null);
 __decorate([
     tsoa_1.Delete('{id}')
@@ -70,6 +101,7 @@ ContentController = ContentController_1 = __decorate([
     tsoa_1.Tags('Content'),
     tsoa_1.Route('content'),
     ioc_1.ProvideSingleton(ContentController_1),
-    __param(0, inversify_1.inject(ContentService_1.ContentService))
+    __param(0, inversify_1.inject(ContentService_1.ContentService)),
+    __param(1, inversify_1.inject(TagService_1.TagService))
 ], ContentController);
 exports.ContentController = ContentController;
