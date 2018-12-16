@@ -2,7 +2,7 @@ import { Controller, Tags, Route, Get, Query, Post, Body, Delete } from "tsoa";
 import { inject } from "inversify";
 import { ContentService } from "../services/ContentService";
 import { ProvideSingleton } from "../inversify/ioc";
-import { MContentView } from "../views/MContentView";
+import { MContentView, ContentModule } from "../views/MContentView";
 import { IPaginationModel, ContentEntity } from "../entities/index";
 import * as _ from 'lodash';
 import { TagService } from "../services/TagService";
@@ -40,13 +40,13 @@ export class ContentController extends Controller {
 
   @Post()
   public async saveContent(@Body() content: MContentView): Promise<ContentEntity> {
-    return this.contentService.save(<ContentEntity>content);
+    return this.contentService.save(ContentModule.convertContentView(content));
   }
 
   @Post('add-content')
   public async addContent(@Body() contentView: MContentView): Promise<ContentEntity> {
     try {
-      const content = await this.contentService.save(<ContentEntity>contentView);
+      const content = await this.contentService.save(ContentModule.convertContentView(contentView));
       if (!content) throw new ApiError(Constants.errorTypes.notFound);
 
       for (let index = 0; index < contentView.categories.length; index++) {

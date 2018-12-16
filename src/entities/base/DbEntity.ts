@@ -16,8 +16,6 @@ export const DbSchema = {
   _id: {
     type: mongoose.Schema.Types.ObjectId,
     auto: true,
-    index: true,
-    require: true,
   },
   created: {
     type: mongoose.Schema.Types.Number,
