@@ -6,7 +6,7 @@ import { CategoryService } from "../services/CategoryService";
 import { MCategoryView } from "../views/MCategoryView";
 
 @Tags('Category')
-@Route('Category')
+@Route('category')
 @ProvideSingleton(CategoryController)
 export class CategoryController extends Controller {
   

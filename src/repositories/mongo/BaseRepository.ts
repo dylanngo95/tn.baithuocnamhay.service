@@ -68,7 +68,7 @@ export abstract class BaseRepository<EntityType> implements IBaseRepository<Enti
   }
 
   public async count(query: any): Promise<number> {
-    return await this.documentModel.count(this.cleanWhereQuery(query));
+    return await this.documentModel.estimatedDocumentCount(this.cleanWhereQuery(query));
   }
 
   protected cleanToSave(entity: EntityType): EntityType {

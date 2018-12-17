@@ -8,6 +8,7 @@ import * as _ from 'lodash';
 import { TagService } from "../services/TagService";
 import { ApiError } from "../config/ErrorHandler";
 import { Constants } from "../config/Constants";
+import { CategoryService } from "../services/CategoryService";
 
 
 @Tags('Content')
@@ -18,6 +19,7 @@ export class ContentController extends Controller {
   constructor(
     @inject(ContentService) protected contentService: ContentService,
     @inject(TagService) protected tagService: TagService,
+    @inject(CategoryService) protected categoryService: CategoryService,
   ) {
     super();
   }
@@ -50,17 +52,18 @@ export class ContentController extends Controller {
       if (!content) throw new ApiError(Constants.errorTypes.notFound);
 
       for (let index = 0; index < contentView.categories.length; index++) {
-        const category = contentView.categories[index].trim();
-        if (!_.isEmpty(category)) {
+        const categoryId = contentView.categories[index].trim();
+        const category = await this.categoryService.getByIndex(parseInt(categoryId));
+        if (category) {
           await this.tagService.save({
-            categoryId: category,
+            categoryId: category._id,
             contentId: content._id
           });
         }
       }
       return content;
     } catch (err) {
-      throw new ApiError(Constants.errorTypes.validation);
+      throw new Error(err);
     }
 
   }

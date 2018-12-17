@@ -9,4 +9,9 @@ export class CategoryService extends BaseService<CategoryEntity> {
   constructor(@inject(CategoryRepository) protected repository: CategoryRepository) {
     super();
   }
+
+  public async getByIndex(index: number): Promise<CategoryEntity> {
+    return await this.repository.findOne({ 'index': index });
+  }
+
 }

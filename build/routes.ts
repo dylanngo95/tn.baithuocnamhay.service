@@ -183,7 +183,7 @@ export function RegisterRoutes(app: express.Express) {
             const promise = controller.delete.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, next);
         });
-    app.get('/Category/:id',
+    app.get('/category/:id',
         function(request: any, response: any, next: any) {
             const args = {
                 id: { "in": "path", "name": "id", "required": true, "dataType": "string" },
@@ -205,7 +205,7 @@ export function RegisterRoutes(app: express.Express) {
             const promise = controller.getById.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, next);
         });
-    app.get('/Category',
+    app.get('/category',
         function(request: any, response: any, next: any) {
             const args = {
                 page: { "in": "query", "name": "page", "required": true, "dataType": "double" },
@@ -231,7 +231,7 @@ export function RegisterRoutes(app: express.Express) {
             const promise = controller.getPaginated.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, next);
         });
-    app.post('/Category',
+    app.post('/category',
         function(request: any, response: any, next: any) {
             const args = {
                 content: { "in": "body", "name": "content", "required": true, "ref": "MCategoryView" },
@@ -253,7 +253,7 @@ export function RegisterRoutes(app: express.Express) {
             const promise = controller.addContent.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, next);
         });
-    app.delete('/Category/:id',
+    app.delete('/category/:id',
         function(request: any, response: any, next: any) {
             const args = {
                 id: { "in": "path", "name": "id", "required": true, "dataType": "string" },
