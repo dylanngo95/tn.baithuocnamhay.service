@@ -72,6 +72,19 @@ let ContentController = ContentController_1 = class ContentController extends ts
             }
         });
     }
+    updateContent(id, contentView) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const content = yield this.contentService.update(id, contentView);
+                if (!content)
+                    throw new ErrorHandler_1.ApiError(Constants_1.Constants.errorTypes.notFound);
+                return content;
+            }
+            catch (err) {
+                throw new Error(err);
+            }
+        });
+    }
     delete(id) {
         return __awaiter(this, void 0, void 0, function* () {
             return this.contentService.delete(id);
@@ -79,7 +92,8 @@ let ContentController = ContentController_1 = class ContentController extends ts
     }
 };
 __decorate([
-    tsoa_1.Get('{id}')
+    tsoa_1.Get('{id}'),
+    __param(0, tsoa_1.Path('id'))
 ], ContentController.prototype, "getById", null);
 __decorate([
     tsoa_1.Get(),
@@ -98,7 +112,12 @@ __decorate([
     __param(0, tsoa_1.Body())
 ], ContentController.prototype, "addContent", null);
 __decorate([
-    tsoa_1.Delete('{id}')
+    tsoa_1.Put('{id}'),
+    __param(0, tsoa_1.Path('id')), __param(1, tsoa_1.Body())
+], ContentController.prototype, "updateContent", null);
+__decorate([
+    tsoa_1.Delete('{id}'),
+    __param(0, tsoa_1.Path('id'))
 ], ContentController.prototype, "delete", null);
 ContentController = ContentController_1 = __decorate([
     tsoa_1.Tags('Content'),

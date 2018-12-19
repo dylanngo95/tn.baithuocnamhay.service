@@ -9,4 +9,19 @@ export class TagRepository extends BaseRepository<TagEntity> {
     super();
     super.init('Tags', TagShema, mongoDbConnection);
   }
+
+  public async getByContentId(contentId: string): Promise<TagEntity[]> {
+    const tags = await this.documentModel.find({
+      contentId: contentId
+    });
+    return new this.formatter(tags);
+  }
+
+  public async getByCategoryId(categoryId: string): Promise<TagEntity[]> {
+    const tags = await this.documentModel.find({
+      categoryId: categoryId
+    });
+    return new this.formatter(tags);
+  }
+
 }

@@ -8,6 +8,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var TagService_1;
 const BaseService_1 = require("./base/BaseService");
@@ -18,6 +26,26 @@ let TagService = TagService_1 = class TagService extends BaseService_1.BaseServi
     constructor(repository) {
         super();
         this.repository = repository;
+    }
+    getByContentId(contentId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield this.repository.getByContentId(contentId);
+            }
+            catch (error) {
+                throw new Error(error);
+            }
+        });
+    }
+    getByCategoryId(categoryId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield this.repository.getByCategoryId(categoryId);
+            }
+            catch (error) {
+                throw new Error(error);
+            }
+        });
     }
 };
 TagService = TagService_1 = __decorate([

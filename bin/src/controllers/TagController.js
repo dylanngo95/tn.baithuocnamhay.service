@@ -22,33 +22,54 @@ const tsoa_1 = require("tsoa");
 const ioc_1 = require("../inversify/ioc");
 const TagService_1 = require("../services/TagService");
 let TagController = TagController_1 = class TagController extends tsoa_1.Controller {
-    constructor(service) {
+    constructor(tagService) {
         super();
-        this.service = service;
+        this.tagService = tagService;
     }
     getById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.service.getById(id);
+            return this.tagService.getById(id);
         });
     }
     getPaginated(page, limit, fields, sort, q) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.service.getPaginated(page, limit, fields, sort, q);
+            return this.tagService.getPaginated(page, limit, fields, sort, q);
         });
     }
     addContent(tag) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.service.save(tag);
+            return this.tagService.save(tag);
         });
     }
     delete(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.service.delete(id);
+            return this.tagService.delete(id);
+        });
+    }
+    getByContentId(contentId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield this.tagService.getByContentId(contentId);
+            }
+            catch (error) {
+                throw new Error(error);
+            }
+        });
+    }
+    getByCategoryId(categoryId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield this.tagService.getByCategoryId(categoryId);
+            }
+            catch (error) {
+                throw new Error(error);
+            }
         });
     }
 };
 __decorate([
-    tsoa_1.Get('{id}')
+    tsoa_1.Get('{id}'),
+    __param(0, tsoa_1.Path('id'))
 ], TagController.prototype, "getById", null);
 __decorate([
     tsoa_1.Get(),
@@ -63,8 +84,17 @@ __decorate([
     __param(0, tsoa_1.Body())
 ], TagController.prototype, "addContent", null);
 __decorate([
-    tsoa_1.Delete('{id}')
+    tsoa_1.Delete('{id}'),
+    __param(0, tsoa_1.Path('id'))
 ], TagController.prototype, "delete", null);
+__decorate([
+    tsoa_1.Post('get-by-content-id'),
+    __param(0, tsoa_1.Query())
+], TagController.prototype, "getByContentId", null);
+__decorate([
+    tsoa_1.Post('get-by-category-id'),
+    __param(0, tsoa_1.Query())
+], TagController.prototype, "getByCategoryId", null);
 TagController = TagController_1 = __decorate([
     tsoa_1.Tags('Tag'),
     tsoa_1.Route('tag'),

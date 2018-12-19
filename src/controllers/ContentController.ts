@@ -1,14 +1,14 @@
-import { Controller, Tags, Route, Get, Query, Post, Body, Delete } from "tsoa";
+import { Controller, Tags, Route, Get, Query, Post, Body, Delete, Put, Path } from "tsoa";
 import { inject } from "inversify";
 import { ContentService } from "../services/ContentService";
 import { ProvideSingleton } from "../inversify/ioc";
 import { MContentView, ContentModule } from "../views/MContentView";
 import { IPaginationModel, ContentEntity } from "../entities/index";
-import * as _ from 'lodash';
 import { TagService } from "../services/TagService";
 import { ApiError } from "../config/ErrorHandler";
 import { Constants } from "../config/Constants";
 import { CategoryService } from "../services/CategoryService";
+import * as _ from 'lodash';
 
 
 @Tags('Content')
@@ -25,7 +25,7 @@ export class ContentController extends Controller {
   }
 
   @Get('{id}')
-  public async getById(id: string): Promise<ContentEntity> {
+  public async getById(@Path('id') id: string): Promise<ContentEntity> {
     return this.contentService.getById(id);
   }
 
@@ -65,11 +65,22 @@ export class ContentController extends Controller {
     } catch (err) {
       throw new Error(err);
     }
+  }
 
+  @Put('{id}')
+  public async updateContent(@Path('id') id: string, @Body() contentView: MContentView): Promise<ContentEntity> {
+    try {
+      const content = await this.contentService.update(id, <ContentEntity>contentView);
+      if (!content) throw new ApiError(Constants.errorTypes.notFound);
+
+      return content;
+    } catch(err) {
+      throw new Error(err);
+    }
   }
 
   @Delete('{id}')
-  public async delete(id: string): Promise<void> {
+  public async delete(@Path('id') id: string): Promise<void> {
     return this.contentService.delete(id);
   }
 

@@ -1,4 +1,4 @@
-import { Controller, Tags, Route, Get, Query, Post, Body, Delete } from "tsoa";
+import { Controller, Tags, Route, Get, Query, Post, Body, Delete, Path } from "tsoa";
 import { inject } from "inversify";
 import { ProvideSingleton } from "../inversify/ioc";
 import { IPaginationModel, ContentEntity, CategoryEntity } from "../entities/index";
@@ -15,7 +15,7 @@ export class CategoryController extends Controller {
   }
 
   @Get('{id}')
-  public async getById(id: string): Promise<MCategoryView> {
+  public async getById(@Path('id') id: string): Promise<MCategoryView> {
     return this.service.getById(id);
   }
 
@@ -36,7 +36,7 @@ export class CategoryController extends Controller {
   }
 
   @Delete('{id}')
-  public delete(id: string): Promise<void> {
+  public delete(@Path('id') id: string): Promise<void> {
     return this.service.delete(id);
   }
 

@@ -237,6 +237,40 @@
 					}
 				]
 			},
+			"put": {
+				"operationId": "UpdateContent",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/ContentEntity"
+						}
+					}
+				},
+				"tags": [
+					"Content"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "body",
+						"name": "contentView",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/MContentView"
+						}
+					}
+				]
+			},
 			"delete": {
 				"operationId": "Delete",
 				"produces": [
@@ -635,6 +669,68 @@
 						"schema": {
 							"$ref": "#/definitions/MTagView"
 						}
+					}
+				]
+			}
+		},
+		"/tag/get-by-content-id": {
+			"post": {
+				"operationId": "GetByContentId",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/TagEntity"
+							}
+						}
+					}
+				},
+				"tags": [
+					"Tag"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "contentId",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/tag/get-by-category-id": {
+			"post": {
+				"operationId": "GetByCategoryId",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/TagEntity"
+							}
+						}
+					}
+				},
+				"tags": [
+					"Tag"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "categoryId",
+						"required": true,
+						"type": "string"
 					}
 				]
 			}

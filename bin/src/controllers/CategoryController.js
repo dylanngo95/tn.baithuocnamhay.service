@@ -47,7 +47,8 @@ let CategoryController = CategoryController_1 = class CategoryController extends
     }
 };
 __decorate([
-    tsoa_1.Get('{id}')
+    tsoa_1.Get('{id}'),
+    __param(0, tsoa_1.Path('id'))
 ], CategoryController.prototype, "getById", null);
 __decorate([
     tsoa_1.Get(),
@@ -62,7 +63,8 @@ __decorate([
     __param(0, tsoa_1.Body())
 ], CategoryController.prototype, "addContent", null);
 __decorate([
-    tsoa_1.Delete('{id}')
+    tsoa_1.Delete('{id}'),
+    __param(0, tsoa_1.Path('id'))
 ], CategoryController.prototype, "delete", null);
 CategoryController = CategoryController_1 = __decorate([
     tsoa_1.Tags('Category'),

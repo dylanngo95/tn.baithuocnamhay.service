@@ -144,6 +144,25 @@ function RegisterRoutes(app) {
         const promise = controller.addContent.apply(controller, validatedArgs);
         promiseHandler(controller, promise, response, next);
     });
+    app.put('/content/:id', function (request, response, next) {
+        const args = {
+            id: { "in": "path", "name": "id", "required": true, "dataType": "string" },
+            contentView: { "in": "body", "name": "contentView", "required": true, "ref": "MContentView" },
+        };
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request);
+        }
+        catch (err) {
+            return next(err);
+        }
+        const controller = ioc_1.iocContainer.get(ContentController_1.ContentController);
+        if (typeof controller['setStatus'] === 'function') {
+            controller.setStatus(undefined);
+        }
+        const promise = controller.updateContent.apply(controller, validatedArgs);
+        promiseHandler(controller, promise, response, next);
+    });
     app.delete('/content/:id', function (request, response, next) {
         const args = {
             id: { "in": "path", "name": "id", "required": true, "dataType": "string" },
@@ -312,6 +331,42 @@ function RegisterRoutes(app) {
             controller.setStatus(undefined);
         }
         const promise = controller.delete.apply(controller, validatedArgs);
+        promiseHandler(controller, promise, response, next);
+    });
+    app.post('/tag/get-by-content-id', function (request, response, next) {
+        const args = {
+            contentId: { "in": "query", "name": "contentId", "required": true, "dataType": "string" },
+        };
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request);
+        }
+        catch (err) {
+            return next(err);
+        }
+        const controller = ioc_1.iocContainer.get(TagController_1.TagController);
+        if (typeof controller['setStatus'] === 'function') {
+            controller.setStatus(undefined);
+        }
+        const promise = controller.getByContentId.apply(controller, validatedArgs);
+        promiseHandler(controller, promise, response, next);
+    });
+    app.post('/tag/get-by-category-id', function (request, response, next) {
+        const args = {
+            categoryId: { "in": "query", "name": "categoryId", "required": true, "dataType": "string" },
+        };
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request);
+        }
+        catch (err) {
+            return next(err);
+        }
+        const controller = ioc_1.iocContainer.get(TagController_1.TagController);
+        if (typeof controller['setStatus'] === 'function') {
+            controller.setStatus(undefined);
+        }
+        const promise = controller.getByCategoryId.apply(controller, validatedArgs);
         promiseHandler(controller, promise, response, next);
     });
     function isController(object) {
