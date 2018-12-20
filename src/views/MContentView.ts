@@ -1,5 +1,4 @@
 import { ContentEntity } from "../entities/index";
-import { SSL_OP_NO_TLSv1_1 } from "constants";
 
 export interface MContentView {
   title: string;

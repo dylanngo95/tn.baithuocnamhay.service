@@ -81,7 +81,20 @@ export class ContentController extends Controller {
 
   @Delete('{id}')
   public async delete(@Path('id') id: string): Promise<void> {
-    return this.contentService.delete(id);
+    try {
+      const res = await this.contentService.delete(id);
+      if (res.n) {
+        const categories = await this.tagService.getByContentId(id);
+        if (categories) {
+          categories.forEach(item => {
+            this.tagService.delete(item._id);
+          })
+          return;
+        }
+      }
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
 }

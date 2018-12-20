@@ -43,7 +43,8 @@ let TagController = TagController_1 = class TagController extends tsoa_1.Control
     }
     delete(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.tagService.delete(id);
+            this.tagService.delete(id);
+            return;
         });
     }
     getByContentId(contentId) {

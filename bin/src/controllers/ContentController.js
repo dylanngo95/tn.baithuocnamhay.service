@@ -87,7 +87,21 @@ let ContentController = ContentController_1 = class ContentController extends ts
     }
     delete(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.contentService.delete(id);
+            try {
+                const res = yield this.contentService.delete(id);
+                if (res.n) {
+                    const categories = yield this.tagService.getByContentId(id);
+                    if (categories) {
+                        categories.forEach(item => {
+                            this.tagService.delete(item._id);
+                        });
+                        return;
+                    }
+                }
+            }
+            catch (error) {
+                throw new Error(error);
+            }
         });
     }
 };

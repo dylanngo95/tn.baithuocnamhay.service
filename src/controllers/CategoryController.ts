@@ -37,7 +37,8 @@ export class CategoryController extends Controller {
 
   @Delete('{id}')
   public delete(@Path('id') id: string): Promise<void> {
-    return this.service.delete(id);
+    this.service.delete(id);
+    return;
   }
 
 }

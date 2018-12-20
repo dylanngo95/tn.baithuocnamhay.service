@@ -53,9 +53,10 @@ export abstract class BaseService<EntityModel> {
     return this.getById(id);
   }
 
-  public async delete(id: string): Promise<void> {
+  public async delete(id: string): Promise<{n: number}> {
     const res = await this.repository.delete(id);
     if (!res.n) throw new ApiError(Constants.errorTypes.notFound);
+    return res;
   }
 
 }

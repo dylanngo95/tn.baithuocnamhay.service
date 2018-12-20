@@ -45,7 +45,8 @@ export class TagController extends Controller {
 
   @Delete('{id}')
   public async delete(@Path('id') id: string): Promise<void> {
-    return this.tagService.delete(id);
+    this.tagService.delete(id);
+    return;
   }
 
   @Post('get-by-content-id')

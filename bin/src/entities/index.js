@@ -4,6 +4,5 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./PaginationModel"));
-__export(require("./UserEntity"));
 __export(require("./ContentEntity"));
 __export(require("./CategoryEntity"));

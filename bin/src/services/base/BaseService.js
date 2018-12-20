@@ -64,6 +64,7 @@ class BaseService {
             const res = yield this.repository.delete(id);
             if (!res.n)
                 throw new ErrorHandler_1.ApiError(Constants_1.Constants.errorTypes.notFound);
+            return res;
         });
     }
 }

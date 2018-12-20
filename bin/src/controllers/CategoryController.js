@@ -43,7 +43,8 @@ let CategoryController = CategoryController_1 = class CategoryController extends
         });
     }
     delete(id) {
-        return this.service.delete(id);
+        this.service.delete(id);
+        return;
     }
 };
 __decorate([
