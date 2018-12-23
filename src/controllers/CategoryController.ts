@@ -31,8 +31,8 @@ export class CategoryController extends Controller {
   }
 
   @Post()
-  public async addContent(@Body() content: MCategoryView): Promise<MCategoryView> {
-    return this.service.save(<CategoryEntity>content);
+  public async addContent(@Body() category: MCategoryView): Promise<MCategoryView> {
+    return this.service.save(<CategoryEntity>category);
   }
 
   @Delete('{id}')

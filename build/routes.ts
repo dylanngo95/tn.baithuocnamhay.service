@@ -19,6 +19,7 @@ const models: TsoaRoute.Models = {
             "active": { "dataType": "double", "required": true },
             "image": { "dataType": "string", "required": true },
             "userId": { "dataType": "string", "required": true },
+            "categories": { "dataType": "string", "required": true },
         },
     },
     "IPaginationModel": {
@@ -120,7 +121,7 @@ export function RegisterRoutes(app: express.Express) {
     app.post('/content',
         function(request: any, response: any, next: any) {
             const args = {
-                content: { "in": "body", "name": "content", "required": true, "ref": "MContentView" },
+                contentView: { "in": "body", "name": "contentView", "required": true, "ref": "MContentView" },
             };
 
             let validatedArgs: any[] = [];
@@ -257,7 +258,7 @@ export function RegisterRoutes(app: express.Express) {
     app.post('/category',
         function(request: any, response: any, next: any) {
             const args = {
-                content: { "in": "body", "name": "content", "required": true, "ref": "MCategoryView" },
+                category: { "in": "body", "name": "category", "required": true, "ref": "MCategoryView" },
             };
 
             let validatedArgs: any[] = [];

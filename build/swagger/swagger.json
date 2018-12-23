@@ -42,6 +42,9 @@
 				},
 				"userId": {
 					"type": "string"
+				},
+				"categories": {
+					"type": "string"
 				}
 			},
 			"required": [
@@ -50,7 +53,8 @@
 				"content",
 				"active",
 				"image",
-				"userId"
+				"userId",
+				"categories"
 			],
 			"type": "object"
 		},
@@ -368,7 +372,7 @@
 				"parameters": [
 					{
 						"in": "body",
-						"name": "content",
+						"name": "contentView",
 						"required": true,
 						"schema": {
 							"$ref": "#/definitions/MContentView"
@@ -531,7 +535,7 @@
 				"parameters": [
 					{
 						"in": "body",
-						"name": "content",
+						"name": "category",
 						"required": true,
 						"schema": {
 							"$ref": "#/definitions/MCategoryView"

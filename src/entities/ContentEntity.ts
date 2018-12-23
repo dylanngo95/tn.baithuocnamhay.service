@@ -8,6 +8,7 @@ export interface ContentEntity extends DbEntity {
   active: number;
   image: string;
   userId: string;
+  categories: string;
 }
 
 export const ContentSchema = {
@@ -18,4 +19,5 @@ export const ContentSchema = {
   active: { type: Number, require: true, },
   image: { type: String, require: true, },
   userId: { type: String, require: true, },
+  categories: { type: String, require: true, },
 };

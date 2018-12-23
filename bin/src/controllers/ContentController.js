@@ -44,9 +44,9 @@ let ContentController = ContentController_1 = class ContentController extends ts
             return this.contentService.getPaginated(page, limit, fields, sort, q);
         });
     }
-    saveContent(content) {
+    saveContent(contentView) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.contentService.save(MContentView_1.ContentModule.convertContentView(content));
+            return this.contentService.save(MContentView_1.ContentModule.convertContentView(contentView));
         });
     }
     addContent(contentView) {
@@ -75,7 +75,7 @@ let ContentController = ContentController_1 = class ContentController extends ts
     updateContent(id, contentView) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const content = yield this.contentService.update(id, contentView);
+                const content = yield this.contentService.update(id, MContentView_1.ContentModule.convertContentView(contentView));
                 if (!content)
                     throw new ErrorHandler_1.ApiError(Constants_1.Constants.errorTypes.notFound);
                 return content;

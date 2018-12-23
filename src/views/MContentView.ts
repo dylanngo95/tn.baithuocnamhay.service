@@ -12,6 +12,11 @@ export interface MContentView {
 
 export module ContentModule {
   export function convertContentView(mContentView: MContentView): ContentEntity {
+    
+    let categories = '';
+    mContentView.categories.forEach(element => {
+      categories += element + ',';
+    });
     const contentEntity: ContentEntity = {
       title: mContentView.title,
       content: mContentView.content,
@@ -19,6 +24,7 @@ export module ContentModule {
       image: mContentView.image,
       active: mContentView.active,
       userId: mContentView.userId,
+      categories: categories,
     }
     return contentEntity;
   }

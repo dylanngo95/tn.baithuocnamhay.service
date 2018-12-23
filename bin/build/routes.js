@@ -19,6 +19,7 @@ const models = {
             "active": { "dataType": "double", "required": true },
             "image": { "dataType": "string", "required": true },
             "userId": { "dataType": "string", "required": true },
+            "categories": { "dataType": "string", "required": true },
         },
     },
     "IPaginationModel": {
@@ -110,7 +111,7 @@ function RegisterRoutes(app) {
     });
     app.post('/content', function (request, response, next) {
         const args = {
-            content: { "in": "body", "name": "content", "required": true, "ref": "MContentView" },
+            contentView: { "in": "body", "name": "contentView", "required": true, "ref": "MContentView" },
         };
         let validatedArgs = [];
         try {
@@ -223,7 +224,7 @@ function RegisterRoutes(app) {
     });
     app.post('/category', function (request, response, next) {
         const args = {
-            content: { "in": "body", "name": "content", "required": true, "ref": "MCategoryView" },
+            category: { "in": "body", "name": "category", "required": true, "ref": "MCategoryView" },
         };
         let validatedArgs = [];
         try {

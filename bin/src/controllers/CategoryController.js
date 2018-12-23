@@ -37,9 +37,9 @@ let CategoryController = CategoryController_1 = class CategoryController extends
             return this.service.getPaginated(page, limit, fields, sort, q);
         });
     }
-    addContent(content) {
+    addContent(category) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.service.save(content);
+            return this.service.save(category);
         });
     }
     delete(id) {

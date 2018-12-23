@@ -41,8 +41,8 @@ export class ContentController extends Controller {
   }
 
   @Post()
-  public async saveContent(@Body() content: MContentView): Promise<ContentEntity> {
-    return this.contentService.save(ContentModule.convertContentView(content));
+  public async saveContent(@Body() contentView: MContentView): Promise<ContentEntity> {
+    return this.contentService.save(ContentModule.convertContentView(contentView));
   }
 
   @Post('add-content')
@@ -70,7 +70,7 @@ export class ContentController extends Controller {
   @Put('{id}')
   public async updateContent(@Path('id') id: string, @Body() contentView: MContentView): Promise<ContentEntity> {
     try {
-      const content = await this.contentService.update(id, <ContentEntity>contentView);
+      const content = await this.contentService.update(id, ContentModule.convertContentView(contentView));
       if (!content) throw new ApiError(Constants.errorTypes.notFound);
 
       return content;
