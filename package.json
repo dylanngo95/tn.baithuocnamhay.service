@@ -37,7 +37,6 @@
     "reflect-metadata": "^0.1.12",
     "swagger-ui-express": "^4.0.1",
     "tsoa": "^2.3.0",
-    "uuid": "^3.2.1",
     "winston": "^3.0.0-rc4"
   },
   "devDependencies": {
