@@ -9,7 +9,7 @@ import * as express from 'express';
 const models: TsoaRoute.Models = {
     "ContentEntity": {
         "properties": {
-            "_id": { "dataType": "any" },
+            "_id": { "dataType": "any", "required": true },
             "created": { "dataType": "double" },
             "updated": { "dataType": "double" },
             "delete": { "dataType": "boolean" },
@@ -58,7 +58,7 @@ const models: TsoaRoute.Models = {
     },
     "TagEntity": {
         "properties": {
-            "_id": { "dataType": "any" },
+            "_id": { "dataType": "any", "required": true },
             "created": { "dataType": "double" },
             "updated": { "dataType": "double" },
             "delete": { "dataType": "boolean" },
@@ -89,7 +89,7 @@ export function RegisterRoutes(app: express.Express) {
             }
 
 
-            const promise = controller.getById.apply(controller, validatedArgs);
+            const promise = controller.getById.apply(controller, validatedArgs as any);
             promiseHandler(controller, promise, response, next);
         });
     app.get('/content',
@@ -115,7 +115,7 @@ export function RegisterRoutes(app: express.Express) {
             }
 
 
-            const promise = controller.getPaginated.apply(controller, validatedArgs);
+            const promise = controller.getPaginated.apply(controller, validatedArgs as any);
             promiseHandler(controller, promise, response, next);
         });
     app.post('/content',
@@ -137,7 +137,7 @@ export function RegisterRoutes(app: express.Express) {
             }
 
 
-            const promise = controller.saveContent.apply(controller, validatedArgs);
+            const promise = controller.saveContent.apply(controller, validatedArgs as any);
             promiseHandler(controller, promise, response, next);
         });
     app.post('/content/add-content',
@@ -159,7 +159,7 @@ export function RegisterRoutes(app: express.Express) {
             }
 
 
-            const promise = controller.addContent.apply(controller, validatedArgs);
+            const promise = controller.addContent.apply(controller, validatedArgs as any);
             promiseHandler(controller, promise, response, next);
         });
     app.put('/content/:id',
@@ -182,7 +182,7 @@ export function RegisterRoutes(app: express.Express) {
             }
 
 
-            const promise = controller.updateContent.apply(controller, validatedArgs);
+            const promise = controller.updateContent.apply(controller, validatedArgs as any);
             promiseHandler(controller, promise, response, next);
         });
     app.delete('/content/:id',
@@ -204,7 +204,7 @@ export function RegisterRoutes(app: express.Express) {
             }
 
 
-            const promise = controller.delete.apply(controller, validatedArgs);
+            const promise = controller.delete.apply(controller, validatedArgs as any);
             promiseHandler(controller, promise, response, next);
         });
     app.get('/category/:id',
@@ -226,7 +226,7 @@ export function RegisterRoutes(app: express.Express) {
             }
 
 
-            const promise = controller.getById.apply(controller, validatedArgs);
+            const promise = controller.getById.apply(controller, validatedArgs as any);
             promiseHandler(controller, promise, response, next);
         });
     app.get('/category',
@@ -252,7 +252,7 @@ export function RegisterRoutes(app: express.Express) {
             }
 
 
-            const promise = controller.getPaginated.apply(controller, validatedArgs);
+            const promise = controller.getPaginated.apply(controller, validatedArgs as any);
             promiseHandler(controller, promise, response, next);
         });
     app.post('/category',
@@ -274,7 +274,7 @@ export function RegisterRoutes(app: express.Express) {
             }
 
 
-            const promise = controller.addContent.apply(controller, validatedArgs);
+            const promise = controller.addContent.apply(controller, validatedArgs as any);
             promiseHandler(controller, promise, response, next);
         });
     app.delete('/category/:id',
@@ -296,7 +296,7 @@ export function RegisterRoutes(app: express.Express) {
             }
 
 
-            const promise = controller.delete.apply(controller, validatedArgs);
+            const promise = controller.delete.apply(controller, validatedArgs as any);
             promiseHandler(controller, promise, response, next);
         });
     app.get('/tag/:id',
@@ -318,7 +318,7 @@ export function RegisterRoutes(app: express.Express) {
             }
 
 
-            const promise = controller.getById.apply(controller, validatedArgs);
+            const promise = controller.getById.apply(controller, validatedArgs as any);
             promiseHandler(controller, promise, response, next);
         });
     app.get('/tag',
@@ -344,7 +344,7 @@ export function RegisterRoutes(app: express.Express) {
             }
 
 
-            const promise = controller.getPaginated.apply(controller, validatedArgs);
+            const promise = controller.getPaginated.apply(controller, validatedArgs as any);
             promiseHandler(controller, promise, response, next);
         });
     app.post('/tag',
@@ -366,7 +366,7 @@ export function RegisterRoutes(app: express.Express) {
             }
 
 
-            const promise = controller.addContent.apply(controller, validatedArgs);
+            const promise = controller.addContent.apply(controller, validatedArgs as any);
             promiseHandler(controller, promise, response, next);
         });
     app.delete('/tag/:id',
@@ -388,13 +388,14 @@ export function RegisterRoutes(app: express.Express) {
             }
 
 
-            const promise = controller.delete.apply(controller, validatedArgs);
+            const promise = controller.delete.apply(controller, validatedArgs as any);
             promiseHandler(controller, promise, response, next);
         });
-    app.post('/tag/get-by-content-id',
+    app.get('/tag/get-by-content-id/:contentId',
         function(request: any, response: any, next: any) {
             const args = {
-                contentId: { "in": "query", "name": "contentId", "required": true, "dataType": "string" },
+                contentId: { "in": "path", "name": "contentId", "required": true, "dataType": "string" },
+                id: { "in": "query", "name": "id", "required": true, "dataType": "string" },
             };
 
             let validatedArgs: any[] = [];
@@ -410,7 +411,7 @@ export function RegisterRoutes(app: express.Express) {
             }
 
 
-            const promise = controller.getByContentId.apply(controller, validatedArgs);
+            const promise = controller.getByContentId.apply(controller, validatedArgs as any);
             promiseHandler(controller, promise, response, next);
         });
     app.post('/tag/get-by-category-id',
@@ -432,7 +433,7 @@ export function RegisterRoutes(app: express.Express) {
             }
 
 
-            const promise = controller.getByCategoryId.apply(controller, validatedArgs);
+            const promise = controller.getByCategoryId.apply(controller, validatedArgs as any);
             promiseHandler(controller, promise, response, next);
         });
 

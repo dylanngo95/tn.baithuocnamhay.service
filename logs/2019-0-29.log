@@ -1,0 +1,116 @@
+[32minfo[39m: "Server running environment: development with port: 3000"
+[32minfo[39m: "Go to http://localhost:3000"
+[32minfo[39m: "Server running environment: development with port: 3000"
+[32minfo[39m: "Go to http://localhost:3000"
+[32minfo[39m: "Server running environment: development with port: 3000"
+[32minfo[39m: "Go to http://localhost:3000"
+[32minfo[39m: "Server running environment: development with port: 3000"
+[32minfo[39m: "Go to http://localhost:3000"
+[32minfo[39m: "Server running environment: development with port: 3000"
+[32minfo[39m: "Go to http://localhost:3000"
+[31merror[39m: [
+    "Error: 404",
+    "Error Name: Not Found",
+    "Error Message: content not found",
+    "Error Fields:",
+    {},
+    "Original Error: ",
+    {
+        "statusCode": 404,
+        "name": "Not Found"
+    }
+]
+[32minfo[39m: "Server running environment: development with port: 3000"
+[32minfo[39m: "Go to http://localhost:3000"
+[31merror[39m: [
+    "Error: 500",
+    "Error Name: Internal Server Error",
+    "Error Message: database error",
+    "Error Fields:",
+    {},
+    "Original Error: ",
+    {
+        "message": "Cast to ObjectId failed for value \"get-by-content-id\" at path \"_id\" for model \"Tags\"",
+        "name": "CastError",
+        "stringValue": "\"get-by-content-id\"",
+        "kind": "ObjectId",
+        "value": "get-by-content-id",
+        "path": "_id"
+    }
+]
+[32minfo[39m: "Server running environment: development with port: 3000"
+[32minfo[39m: "Go to http://localhost:3000"
+[31merror[39m: [
+    "Error: 500",
+    "Error Name: Internal Server Error",
+    "Error Message: database error",
+    "Error Fields:",
+    {},
+    "Original Error: ",
+    {
+        "message": "Cast to ObjectId failed for value \"get-by-content-id\" at path \"_id\" for model \"Tags\"",
+        "name": "CastError",
+        "stringValue": "\"get-by-content-id\"",
+        "kind": "ObjectId",
+        "value": "get-by-content-id",
+        "path": "_id"
+    }
+]
+[32minfo[39m: "Server running environment: development with port: 3000"
+[32minfo[39m: "Go to http://localhost:3000"
+[31merror[39m: [
+    "Error: 500",
+    "Error Name: Internal Server Error",
+    "Error Message: database error",
+    "Error Fields:",
+    {},
+    "Original Error: ",
+    {
+        "message": "Cast to ObjectId failed for value \"get-by-content-id\" at path \"_id\" for model \"Tags\"",
+        "name": "CastError",
+        "stringValue": "\"get-by-content-id\"",
+        "kind": "ObjectId",
+        "value": "get-by-content-id",
+        "path": "_id"
+    }
+]
+[32minfo[39m: "Server running environment: development with port: 3000"
+[32minfo[39m: "Go to http://localhost:3000"
+[31merror[39m: [
+    "Error: 500",
+    "Error Name: Internal Server Error",
+    "Error Message: database error",
+    "Error Fields:",
+    {},
+    "Original Error: ",
+    {
+        "message": "Cast to ObjectId failed for value \"get-by-content-id\" at path \"_id\" for model \"Tags\"",
+        "name": "CastError",
+        "stringValue": "\"get-by-content-id\"",
+        "kind": "ObjectId",
+        "value": "get-by-content-id",
+        "path": "_id"
+    }
+]
+[32minfo[39m: "Server running environment: development with port: 3000"
+[32minfo[39m: "Go to http://localhost:3000"
+[31merror[39m: [
+    "Error: 500",
+    "Error Name: Internal Server Error",
+    "Error Message: database error",
+    "Error Fields:",
+    {},
+    "Original Error: ",
+    {
+        "message": "Cast to ObjectId failed for value \"get-by-content-id\" at path \"_id\" for model \"Tags\"",
+        "name": "CastError",
+        "stringValue": "\"get-by-content-id\"",
+        "kind": "ObjectId",
+        "value": "get-by-content-id",
+        "path": "_id"
+    }
+]
+[32minfo[39m: "Server running environment: development with port: 3000"
+[32minfo[39m: "Go to http://localhost:3000"
+[32minfo[39m: "Server running environment: development with port: 3000"
+[32minfo[39m: "Go to http://localhost:3000"

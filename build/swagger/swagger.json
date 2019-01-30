@@ -7,8 +7,7 @@
 		"ContentEntity": {
 			"properties": {
 				"_id": {
-					"type": "object",
-					"x-nullable": true
+					"type": "object"
 				},
 				"created": {
 					"type": "number",
@@ -48,6 +47,7 @@
 				}
 			},
 			"required": [
+				"_id",
 				"title",
 				"description",
 				"content",
@@ -174,8 +174,7 @@
 		"TagEntity": {
 			"properties": {
 				"_id": {
-					"type": "object",
-					"x-nullable": true
+					"type": "object"
 				},
 				"created": {
 					"type": "number",
@@ -199,6 +198,7 @@
 				}
 			},
 			"required": [
+				"_id",
 				"contentId",
 				"categoryId"
 			],
@@ -677,8 +677,8 @@
 				]
 			}
 		},
-		"/tag/get-by-content-id": {
-			"post": {
+		"/tag/get-by-content-id/{contentId}": {
+			"get": {
 				"operationId": "GetByContentId",
 				"produces": [
 					"application/json"
@@ -700,8 +700,14 @@
 				"security": [],
 				"parameters": [
 					{
-						"in": "query",
+						"in": "path",
 						"name": "contentId",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "query",
+						"name": "id",
 						"required": true,
 						"type": "string"
 					}

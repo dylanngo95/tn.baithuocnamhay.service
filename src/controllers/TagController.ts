@@ -49,9 +49,11 @@ export class TagController extends Controller {
     return;
   }
 
-  @Post('get-by-content-id')
-  public async getByContentId(@Query() contentId: string) {
+  @Get('get-by-content-id/{contentId}')
+  public async getByContentId(@Path('contentId') contentId: string) {
     try {
+      console.error("===================>contentId");
+      console.error(contentId);
       return await this.tagService.getByContentId(contentId);
     } catch (error) {
       throw new Error(error);

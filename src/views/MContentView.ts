@@ -18,6 +18,7 @@ export module ContentModule {
       categories += element + ',';
     });
     const contentEntity: ContentEntity = {
+      _id: 1,
       title: mContentView.title,
       content: mContentView.content,
       description: mContentView.description,

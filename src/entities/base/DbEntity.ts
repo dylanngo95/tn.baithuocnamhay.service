@@ -6,7 +6,7 @@ export interface DbView extends View {
 }
 
 export interface DbEntity extends DbView, Entity {
-  _id?: any;
+  _id: any;
   created?: number;
   updated?: number;
   delete?: boolean;
