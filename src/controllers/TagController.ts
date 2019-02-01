@@ -52,16 +52,14 @@ export class TagController extends Controller {
   @Get('get-by-content-id/{contentId}')
   public async getByContentId(@Path('contentId') contentId: string) {
     try {
-      console.error("===================>contentId");
-      console.error(contentId);
       return await this.tagService.getByContentId(contentId);
     } catch (error) {
       throw new Error(error);
     }
   }
 
-  @Post('get-by-category-id')
-  public async getByCategoryId(@Query() categoryId: string) {
+  @Get('get-by-category-id/{categoryId}')
+  public async getByCategoryId(@Path('categoryId') categoryId: string) {
     try {
       return await this.tagService.getByCategoryId(categoryId);
     } catch (error) {

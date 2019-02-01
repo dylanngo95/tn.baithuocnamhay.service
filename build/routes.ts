@@ -9,7 +9,7 @@ import * as express from 'express';
 const models: TsoaRoute.Models = {
     "ContentEntity": {
         "properties": {
-            "_id": { "dataType": "any", "required": true },
+            "_id": { "dataType": "any" },
             "created": { "dataType": "double" },
             "updated": { "dataType": "double" },
             "delete": { "dataType": "boolean" },
@@ -58,7 +58,7 @@ const models: TsoaRoute.Models = {
     },
     "TagEntity": {
         "properties": {
-            "_id": { "dataType": "any", "required": true },
+            "_id": { "dataType": "any" },
             "created": { "dataType": "double" },
             "updated": { "dataType": "double" },
             "delete": { "dataType": "boolean" },
@@ -395,7 +395,6 @@ export function RegisterRoutes(app: express.Express) {
         function(request: any, response: any, next: any) {
             const args = {
                 contentId: { "in": "path", "name": "contentId", "required": true, "dataType": "string" },
-                id: { "in": "query", "name": "id", "required": true, "dataType": "string" },
             };
 
             let validatedArgs: any[] = [];
@@ -414,10 +413,10 @@ export function RegisterRoutes(app: express.Express) {
             const promise = controller.getByContentId.apply(controller, validatedArgs as any);
             promiseHandler(controller, promise, response, next);
         });
-    app.post('/tag/get-by-category-id',
+    app.get('/tag/get-by-category-id/:categoryId',
         function(request: any, response: any, next: any) {
             const args = {
-                categoryId: { "in": "query", "name": "categoryId", "required": true, "dataType": "string" },
+                categoryId: { "in": "path", "name": "categoryId", "required": true, "dataType": "string" },
             };
 
             let validatedArgs: any[] = [];

@@ -56,7 +56,6 @@ export class ContentController extends Controller {
         const category = await this.categoryService.getByIndex(parseInt(categoryId));
         if (category) {
           await this.tagService.save({
-            _id: 1,
             categoryId: category._id,
             contentId: content._id
           });
