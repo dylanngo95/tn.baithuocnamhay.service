@@ -1,8 +1,6 @@
 # tn.baithuocnamhay.service
 
-## Service support Restful API, Database Mongodb, Swagger
-
-## Support Typescript
+Service support Restful API, Database Mongodb, Swagger, Typescript
 
 ## How to run project
 
@@ -10,5 +8,5 @@
 cd tn.baithuocnamhay.service
 npm i
 npm build
-npm run
+npm start
 ```
